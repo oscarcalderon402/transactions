@@ -49,8 +49,8 @@ class AccountTransactions(models.Model):
     debit = fields.Monetary(string='Debit', default=0.0, currency_field='currency_id')
     credit = fields.Monetary(string='Credit', default=0.0, currency_field='currency_id')
 
-    # payment_id = fields.Char(string='payment_id2', compute='_compute_payment_id' )
-    # instalment = fields.Char(string='instalment', compute='_compute_instalment')
+
+
 
 
     @api.depends('payment_ualett_id', 'cash_advances_id')
@@ -118,7 +118,7 @@ class AccountTransactions(models.Model):
             'state', 'type', 'cash_advances_id',
         ],
         'account.move.line': [
-            'name', 'debit', 'credit', 'partner_id', 'name', 'company_id', 'currency_id', 'date', 'journal_id', 'move_id', 'account_id', 'ref', 'payment_id', 'x_ualett_fee', 'x_ualett_principal'
+            'name', 'debit', 'credit', 'partner_id', 'name', 'company_id', 'currency_id', 'date', 'journal_id', 'move_id', 'account_id', 'ref', 'payment_id'
         ],
         'account.journal': ['type'],
         'account.payment': ['payment_ualett_id', 'capital', 'fee'],
@@ -186,6 +186,7 @@ class AccountTransactions(models.Model):
         return '''
             GROUP BY
                 aml.id,
+                aml.name,
                 ac.type,
                 ac.date,
                 ac.state,
@@ -195,9 +196,11 @@ class AccountTransactions(models.Model):
                 aml.move_id,
                 aml.account_id,
                 aml.x_ualett_fee,
+                ac.cash_advances_id,
                 aj.type,
                 ap.capital,
-                ap.fee
+                ap.fee, 
+                ap.payment_ualett_id
         '''
 
     def init(self):
