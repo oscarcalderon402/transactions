@@ -66,8 +66,8 @@ class AccountTransactions(models.Model):
     @api.depends('name')
     def _compute_label(self):
         for line in self:
-            if str(line.name) == "Cash Advances":
-                line.label = "Cash Advances"
+            if str(line.name) == "Cash Advance":
+                line.label = "Cash Advance"
             else:
                  line.label = "Payments"
 
