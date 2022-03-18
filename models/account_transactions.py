@@ -60,7 +60,7 @@ class AccountTransactions(models.Model):
     @api.depends('payment_ualett_id')
     def _compute_instalment(self):
         for line in self:
-            line['payment_id'] = str(line['payment_ualett_id']).rsplit('-')[1] 
+            line.instalment = str(line['payment_ualett_id']).rsplit('-')[1] 
     # balance = fields.Monetary(string='Balance', currency_field='currency_id', compute='_compute_balance')
 
     # @api.depends('debit', 'credit')
