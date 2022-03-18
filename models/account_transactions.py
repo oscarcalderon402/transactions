@@ -48,8 +48,8 @@ class AccountTransactions(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency')
     debit = fields.Monetary(string='Debit', default=0.0, currency_field='currency_id')
     credit = fields.Monetary(string='Credit', default=0.0, currency_field='currency_id')
-    payment_id = fields.Char(string='payment_id', compute='_compute_payment_id' )
-    instalment = fields.Char(string='payment_id', compute='_compute_instalment')
+    payment_id = fields.Char(string='payment_id2', compute='_compute_payment_id' )
+    instalment = fields.Char(string='instalment', compute='_compute_instalment')
 
 
     @api.depends('payment_ualett_id')
