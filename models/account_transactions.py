@@ -71,7 +71,7 @@ class AccountTransactions(models.Model):
             else:
                  line.label = "Payments"
 
-    label = fields.Char(string='label2', compute='_compute_label' )
+    label = fields.Char(string='Label', compute='_compute_label' )
     # @api.depends('payment_ualett_id')
     # def _compute_instalment(self):
     #     for line in self:
