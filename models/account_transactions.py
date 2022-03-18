@@ -55,12 +55,12 @@ class AccountTransactions(models.Model):
     @api.depends('payment_ualett_id')
     def _compute_payment_id(self):
         for line in self:
-            line['payment_id'] = line['payment_ualett_id'].rsplit('-')[0] 
+            line['payment_id'] = str(line['payment_ualett_id']).rsplit('-')[0] 
 
     @api.depends('payment_ualett_id')
     def _compute_instalment(self):
         for line in self:
-            line['payment_id'] = line['payment_ualett_id'].rsplit('-')[1] 
+            line['payment_id'] = str(line['payment_ualett_id']).rsplit('-')[1] 
     # balance = fields.Monetary(string='Balance', currency_field='currency_id', compute='_compute_balance')
 
     # @api.depends('debit', 'credit')
