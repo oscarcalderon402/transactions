@@ -143,13 +143,13 @@ class AccountTransactions(models.Model):
                aml.name NOT LIKE '%SUPP%'
            '''
 
-    # @api.model
-    # def _when(self):
-    #     return '''
-    #           CASE WHEN aml.journal_id = 1 THEN 'Cash Advances'
-    #           ELSE 'Payments'
-	# 	        END AS name
-    #        '''
+    @api.model
+    def _when(self):
+        return '''
+              CASE WHEN aml.journal_id = 1 THEN 'Cash Advances'
+              ELSE 'Payments'
+		      END AS name
+           '''
 
     @api.model
     def _group_by(self):
@@ -177,8 +177,8 @@ class AccountTransactions(models.Model):
         tools.drop_view_if_exists(self.env.cr, self._table)
         self.env.cr.execute('''
                 CREATE OR REPLACE VIEW %s AS (
-                    %s %s %s %s
+                    %s %s %s %s %s
                 )
             ''' % (
-            self._table, self._select(), self._from(), self._where(), self._group_by()
+            self._table, self._select(), self._from(), self._where(), self._when(), self._group_by()
         ))
