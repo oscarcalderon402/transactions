@@ -48,7 +48,7 @@ class AccountTransactions(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency')
     debit = fields.Monetary(string='Debit', default=0.0, currency_field='currency_id')
     credit = fields.Monetary(string='Credit', default=0.0, currency_field='currency_id')
-    payment_id = fields.Char(string='payment_id2', compute='_compute_payment_id' )
+    # payment_id = fields.Char(string='payment_id2', compute='_compute_payment_id' )
     # instalment = fields.Char(string='instalment', compute='_compute_instalment')
 
 
@@ -56,7 +56,7 @@ class AccountTransactions(models.Model):
     def _compute_payment_id(self):
         for line in self:
             line['payment_id'] = str(line['payment_ualett_id']).rsplit('-')[0] 
-
+    payment_id = fields.Char(string='payment_id2', compute='_compute_payment_id' )
     # @api.depends('payment_ualett_id')
     # def _compute_instalment(self):
     #     for line in self:
