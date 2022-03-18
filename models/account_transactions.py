@@ -149,6 +149,7 @@ class AccountTransactions(models.Model):
               CASE WHEN aml.journal_id = 1 THEN 'Cash Advances'
               ELSE 'Payments'
 		      END AS name
+              FROM account.move.line
            '''
 
     @api.model
