@@ -8,8 +8,6 @@
             <field name="arch" type="xml">
             <tree create="false" edit="false">
                         <field name="date"/>
-                        <field name="cash_advances_id"/>
-                        <field name="payment_ualett_id"/>
                         <field name="payment_id"/>
                         <!-- <field name="instalment"/> -->
                         <field name="type" invisible="1"/>
