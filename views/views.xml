@@ -12,6 +12,7 @@
                         <!-- <field name="instalment"/> -->
                         <field name="type" invisible="1"/>
                         <field name="name"/>
+                        <field name="label"/>
                         <field name="state" invisible="1"/>
                         <field name="journal_id" optional="hide"/>
                         <field name="journal_type" invisible="1"/>
