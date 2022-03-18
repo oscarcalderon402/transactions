@@ -138,9 +138,9 @@ class AccountTransactions(models.Model):
                WHERE ac.state IN ('posted') AND 
                ac.type IN ('entry', 'out_invoice') AND 
                aml.journal_id IN ('1', '8', '21', '18', '19', '7', '38') AND NOT 
-               aml.account_id IN (6, 51) AND NOT
-               aml.name CONTAINS 'Vendor' AND NOT
-               aml.name CONTAINS 'SUPP'
+               aml.account_id IN (6, 51) AND 
+               aml.name NOT LIKE '%Vendor%' AND 
+               aml.name NOT LIKE '%SUPP%'
            '''
 
     # @api.model
