@@ -55,7 +55,7 @@ class AccountTransactions(models.Model):
     @api.depends('payment_ualett_id', 'cash_advances_id')
     def _compute_payment_id(self):
         for line in self:
-            if line['payment_ualett_id'] == "":
+            if str(line['payment_ualett_id']) == "False":
                 line['payment_id'] = str(line['cash_advances_id']) 
             else:
                 line['payment_id'] = str(line['payment_ualett_id']).rsplit('-')[0] 
