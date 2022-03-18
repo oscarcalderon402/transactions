@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+            <field name="model">date.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                    <footer>
+                        <button string="search" class="oe_highlight" type="object" name="search_transactions"/>
+                        <button string="cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="launch_the_wizard"
+            name="Report"
+            res_model="date.wizard"
+            view_mode="form"
+            target="new"/>
+
+        <menuitem name="Report_transaction" id="wizard_report" parent="horizontal_menu" action="launch_the_wizard"/>
+    </data>
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <report
+                id="report_transactions"
+                model="account.transactions"
+                string="Transactions"
+                name="transactions.report_transactions_view"
+                file="transactions.report_transactions_view"
+                report_type="qweb-pdf"/>
+
+        <template id="report_transactions_view">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h3>Transactions</h3>
+							<table class="table">
+  <thead>
+    <tr>
+<!--      <th scope="col">#</th>-->
+      <th scope="col">Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Type</th>
+
+        <th scope="col">Debit</th>
+        <th scope="col">Credit</th>
+        <th scope="col">Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <t t-foreach="doc" t-as="i">
+        <td><span t-field="i.name"/></td>
+        <td><span t-field="i.date"/></td>
+        <td><span t-field="i.type"/></td>
+
+        <td><span t-field="i.debit"/></td>
+        <td><span t-field="i.credit"/></td>
+        <td><span t-field="i.balance"/></td>
+    </t>
+
+  </tbody>
+</table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

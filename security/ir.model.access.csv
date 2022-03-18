@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_transations_transations,transations.transations,model_transations_transations,base.group_user,1,1,1,1
+access_account_transactions,access_account_transactions,model_account_transactions,,1,1,1,1
