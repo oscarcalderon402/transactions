@@ -48,6 +48,19 @@ class AccountTransactions(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency')
     debit = fields.Monetary(string='Debit', default=0.0, currency_field='currency_id')
     credit = fields.Monetary(string='Credit', default=0.0, currency_field='currency_id')
+    payment_id = fields.Char(string='payment_id', compute='_compute_payment_id' )
+    instalment = fields.Char(string='payment_id', compute='_compute_instalment')
+
+
+    @api.depends('payment_ualett_id')
+    def _compute_payment_id(self):
+        for line in self:
+            line['payment_id'] = line['payment_ualett_id'].rsplit('-')[0] 
+
+    @api.depends('payment_ualett_id')
+    def _compute_instalment(self):
+        for line in self:
+            line['payment_id'] = line['payment_ualett_id'].rsplit('-')[1] 
     # balance = fields.Monetary(string='Balance', currency_field='currency_id', compute='_compute_balance')
 
     # @api.depends('debit', 'credit')
@@ -143,14 +156,14 @@ class AccountTransactions(models.Model):
                aml.name NOT LIKE '%SUPP%'
            '''
 
-    @api.model
-    def _when(self):
-        return '''
-              CASE WHEN aml.journal_id = 1 THEN 'Cash Advances'
-              ELSE 'Payments'
-		      END AS name
-              FROM account.move.line
-           '''
+    # @api.model
+    # def _when(self):
+    #     return '''
+    #           CASE WHEN aml.journal_id = 1 THEN 'Cash Advances'
+    #           ELSE 'Payments'
+	# 	      END AS name
+    #           FROM account.move.line
+    #        '''
 
     @api.model
     def _group_by(self):
@@ -178,8 +191,8 @@ class AccountTransactions(models.Model):
         tools.drop_view_if_exists(self.env.cr, self._table)
         self.env.cr.execute('''
                 CREATE OR REPLACE VIEW %s AS (
-                    %s %s %s %s %s
+                    %s %s %s %s 
                 )
             ''' % (
-            self._table, self._select(), self._from(), self._where(), self._when(), self._group_by()
+            self._table, self._select(), self._from(), self._where(), self._group_by()
         ))

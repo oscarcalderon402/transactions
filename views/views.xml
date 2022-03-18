@@ -10,6 +10,8 @@
                         <field name="date"/>
                         <field name="cash_advances_id"/>
                         <field name="payment_ualett_id"/>
+                        <field name="payment_id"/>
+                        <field name="instalment"/>
                         <field name="type" invisible="1"/>
                         <field name="name"/>
                         <field name="state" invisible="1"/>
