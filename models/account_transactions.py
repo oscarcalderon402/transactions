@@ -49,7 +49,7 @@ class AccountTransactions(models.Model):
     debit = fields.Monetary(string='Debit', default=0.0, currency_field='currency_id')
     credit = fields.Monetary(string='Credit', default=0.0, currency_field='currency_id')
     payment_id = fields.Char(string='payment_id2', compute='_compute_payment_id' )
-    instalment = fields.Char(string='instalment', compute='_compute_instalment')
+    # instalment = fields.Char(string='instalment', compute='_compute_instalment')
 
 
     @api.depends('payment_ualett_id')
@@ -57,10 +57,11 @@ class AccountTransactions(models.Model):
         for line in self:
             line['payment_id'] = str(line['payment_ualett_id']).rsplit('-')[0] 
 
-    @api.depends('payment_ualett_id')
-    def _compute_instalment(self):
-        for line in self:
-            line.instalment = str(line['payment_ualett_id']).rsplit('-')[1] 
+    # @api.depends('payment_ualett_id')
+    # def _compute_instalment(self):
+    #     for line in self:
+    #         line.instalment = str(line['payment_ualett_id']).rsplit('-')[1] 
+    
     # balance = fields.Monetary(string='Balance', currency_field='currency_id', compute='_compute_balance')
 
     # @api.depends('debit', 'credit')
