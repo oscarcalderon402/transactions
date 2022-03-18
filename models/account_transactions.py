@@ -186,7 +186,6 @@ class AccountTransactions(models.Model):
         return '''
             GROUP BY
                 aml.id,
-                aml.name,
                 ac.type,
                 ac.date,
                 ac.state,
@@ -196,11 +195,9 @@ class AccountTransactions(models.Model):
                 aml.move_id,
                 aml.account_id,
                 aml.x_ualett_fee,
-                ac.cash_advances_id,
                 aj.type,
                 ap.capital,
-                ap.fee, 
-                ap.payment_ualett_id
+                ap.fee
         '''
 
     def init(self):
