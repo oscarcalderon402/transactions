@@ -52,10 +52,10 @@ class AccountTransactions(models.Model):
     # instalment = fields.Char(string='instalment', compute='_compute_instalment')
 
 
-    @api.depends('payment_ualett_id')
+    @api.depends('payment_ualett_id', 'cash_advances_id')
     def _compute_payment_id(self):
         for line in self:
-            if line['payment_ualett_id'] == "":
+            if line['payment_ualett_id'] == None:
                 line['payment_id'] = str(line['cash_advances_id']) 
             else:
                 line['payment_id'] = str(line['payment_ualett_id']).rsplit('-')[0] 
